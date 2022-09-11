@@ -15,7 +15,8 @@ public class MeetingMakerService {
     public List<MeetTime> calculateMeetings(Calendar calendarOne, Calendar calendarTwo, int duration){
         List<Meeting> actualMeetings = collectAllActualMeetings(calendarOne, calendarTwo);
         List<MeetTime> possibilityMeetings = listingAllPossibilityMeetings(calendarOne, calendarTwo, duration);
-        return deleteWrongMeetings(actualMeetings, possibilityMeetings);
+        List<MeetTime> finalMeetings = deleteWrongMeetings(actualMeetings, possibilityMeetings);
+        return finalMeetings;
     }
 
     public List<MeetTime> deleteWrongMeetings(List<Meeting> actualMeetings, List<MeetTime> meetTimes){
@@ -23,7 +24,7 @@ public class MeetingMakerService {
         for(MeetTime meetTime : meetTimes){
             boolean isOk = true;
             for(Meeting meeting : actualMeetings){
-                if(getMinutesFromTime(meetTime.getStart()) > getMinutesFromTime(meeting.getStart()) && getMinutesFromTime(meetTime.getEnd()) < getMinutesFromTime(meeting.getEnd())) {
+                if(getMinutesFromTime(meetTime.getStart()) >= getMinutesFromTime(meeting.getStart()) && getMinutesFromTime(meetTime.getEnd()) <= getMinutesFromTime(meeting.getEnd())) {
                     isOk = false;
                 }
             }
