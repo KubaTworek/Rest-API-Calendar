@@ -19,7 +19,7 @@ mvn test
 
 ## Run and Test
 
-To do a task in right way. You have to create(POST) two calendars and after that use endpoint
+To do a task in right way. You have to create ```/calendars [POST]``` two calendars and after that use endpoint ```/meetings/{calendarOneId}/{calendarTwoId}/{meetingTime} [GET]```
 
 
 ## Endpoints
@@ -69,7 +69,7 @@ Content-Type: application/json
 }
 ```
 
-When succeed 201 Status code and newly created calendar object are returned. Any amount of planned meetings could be added to calendar. Error will be returned if we type hour in other type than "hh:mm".
+When succeed 201 Status code and newly created calendar object are returned. Any amount of planned meetings could be added to calendar. Error and 403 Status Code will be returned if we type hour in other type than "hh:mm" or used wrong hour or minute.
 
 
 ### Get possible meetings
@@ -84,7 +84,7 @@ When succeed 201 Status code and newly created calendar object are returned. Any
 
 # Working hours
 
-If we did not type any working hours, we will get error and 400 Status Code. Error will also be returned if we didn't type start hours or end hour.
+If we did not type any working hours, we will get error and 400 Status Code. Error and 400 Status Code will also be returned if we didn't type start hours or end hour.
 
 
 ### Database

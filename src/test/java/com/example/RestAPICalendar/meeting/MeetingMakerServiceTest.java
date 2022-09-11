@@ -1,8 +1,6 @@
 package com.example.RestAPICalendar.meeting;
 
 import com.example.RestAPICalendar.entity.Meeting;
-import com.example.RestAPICalendar.model.MeetTime;
-import com.example.RestAPICalendar.model.MeetingMakerService;
 import com.example.RestAPICalendar.service.CalendarService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

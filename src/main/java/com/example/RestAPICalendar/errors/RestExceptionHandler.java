@@ -34,6 +34,16 @@ public class RestExceptionHandler {
     public ResponseEntity<CalendarErrorResponse> handleException(WrongTimeException exc){
         CalendarErrorResponse error = new CalendarErrorResponse();
 
+        error.setStatus(HttpStatus.FORBIDDEN.value());
+        error.setMessage(exc.getMessage());
+
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<CalendarErrorResponse> handleException(TimeIsNullException exc){
+        CalendarErrorResponse error = new CalendarErrorResponse();
+
         error.setStatus(HttpStatus.BAD_REQUEST.value());
         error.setMessage(exc.getMessage());
 

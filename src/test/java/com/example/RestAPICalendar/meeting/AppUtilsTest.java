@@ -1,12 +1,10 @@
 package com.example.RestAPICalendar.meeting;
 
-import com.example.RestAPICalendar.model.AppUtils;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static com.example.RestAPICalendar.model.AppUtils.getMinutesFromTime;
-import static com.example.RestAPICalendar.model.AppUtils.getTimeFromMinutes;
+import static com.example.RestAPICalendar.meeting.AppUtils.getMinutesFromTime;
+import static com.example.RestAPICalendar.meeting.AppUtils.getTimeFromMinutes;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest

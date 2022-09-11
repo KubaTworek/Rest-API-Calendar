@@ -1,4 +1,4 @@
-package com.example.RestAPICalendar.model;
+package com.example.RestAPICalendar.meeting;
 
 import com.example.RestAPICalendar.entity.Calendar;
 import com.example.RestAPICalendar.entity.Meeting;
@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.RestAPICalendar.model.AppUtils.getMinutesFromTime;
-import static com.example.RestAPICalendar.model.AppUtils.getTimeFromMinutes;
+import static com.example.RestAPICalendar.meeting.AppUtils.getMinutesFromTime;
+import static com.example.RestAPICalendar.meeting.AppUtils.getTimeFromMinutes;
 
 @Service
 public class MeetingMakerService {

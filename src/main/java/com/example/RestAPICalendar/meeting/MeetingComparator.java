@@ -1,11 +1,11 @@
-package com.example.RestAPICalendar.model;
+package com.example.RestAPICalendar.meeting;
 
 import com.example.RestAPICalendar.entity.Meeting;
 import org.springframework.stereotype.Component;
 
 import java.util.Comparator;
 
-import static com.example.RestAPICalendar.model.AppUtils.getMinutesFromTime;
+import static com.example.RestAPICalendar.meeting.AppUtils.getMinutesFromTime;
 
 @Component
 public class MeetingComparator implements Comparator<Meeting> {

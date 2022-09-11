@@ -3,8 +3,8 @@ package com.example.RestAPICalendar.service;
 import com.example.RestAPICalendar.dao.CalendarDAO;
 import com.example.RestAPICalendar.entity.Calendar;
 import com.example.RestAPICalendar.errors.CalendarNotFoundException;
-import com.example.RestAPICalendar.model.MeetTime;
-import com.example.RestAPICalendar.model.MeetingMakerService;
+import com.example.RestAPICalendar.meeting.MeetTime;
+import com.example.RestAPICalendar.meeting.MeetingMakerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

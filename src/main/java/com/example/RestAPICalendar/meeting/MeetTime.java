@@ -1,4 +1,4 @@
-package com.example.RestAPICalendar.model;
+package com.example.RestAPICalendar.meeting;
 
 public class MeetTime {
     private String start;

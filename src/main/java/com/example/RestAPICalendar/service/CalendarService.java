@@ -1,7 +1,7 @@
 package com.example.RestAPICalendar.service;
 
 import com.example.RestAPICalendar.entity.Calendar;
-import com.example.RestAPICalendar.model.MeetTime;
+import com.example.RestAPICalendar.meeting.MeetTime;
 
 import java.util.List;
 

@@ -2,9 +2,10 @@ package com.example.RestAPICalendar.rest;
 
 import com.example.RestAPICalendar.entity.Calendar;
 import com.example.RestAPICalendar.entity.Meeting;
+import com.example.RestAPICalendar.errors.TimeIsNullException;
 import com.example.RestAPICalendar.errors.WorkingTimeIsNullException;
 import com.example.RestAPICalendar.errors.WrongTimeException;
-import com.example.RestAPICalendar.model.MeetTime;
+import com.example.RestAPICalendar.meeting.MeetTime;
 import com.example.RestAPICalendar.service.CalendarService;
 import com.example.RestAPICalendar.service.MeetingService;
 import lombok.RequiredArgsConstructor;
@@ -66,8 +67,10 @@ public class Controller {
 
     private boolean isTimeRight(Calendar calendar){
         Pattern pattern = Pattern.compile("[0-2][0-9]:[0-5][0-9]");
+        if(calendar.getWorkingTime().getStart() == null || calendar.getWorkingTime().getEnd() == null) throw new TimeIsNullException("Time is wrong");
         if(!(pattern.matcher(calendar.getWorkingTime().getStart()).matches() && pattern.matcher(calendar.getWorkingTime().getEnd()).matches())) throw new WrongTimeException("Time is wrong");
         for(Meeting tempMeeting : calendar.getMeetings()){
+            if(tempMeeting.getStart() == null || tempMeeting.getEnd() == null) throw new TimeIsNullException("Time is wrong");
             if(!(pattern.matcher(tempMeeting.getStart()).matches() && pattern.matcher(tempMeeting.getEnd()).matches())) throw new WrongTimeException("Time is wrong");
         }
         return true;
