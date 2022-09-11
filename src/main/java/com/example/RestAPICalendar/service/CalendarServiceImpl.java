@@ -2,6 +2,7 @@ package com.example.RestAPICalendar.service;
 
 import com.example.RestAPICalendar.dao.CalendarDAO;
 import com.example.RestAPICalendar.entity.Calendar;
+import com.example.RestAPICalendar.errors.CalendarNotFoundException;
 import com.example.RestAPICalendar.model.MeetTime;
 import com.example.RestAPICalendar.model.MeetingMakerService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class CalendarServiceImpl implements CalendarService{
 
     @Override
     public Calendar findById(int theId) {
-        return calendarDAO.findById(theId).orElse(null);
+        return calendarDAO.findById(theId).orElseThrow(() -> new CalendarNotFoundException("Calendar id not found - " + theId));
     }
 
     @Override

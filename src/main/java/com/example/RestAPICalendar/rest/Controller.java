@@ -2,6 +2,8 @@ package com.example.RestAPICalendar.rest;
 
 import com.example.RestAPICalendar.entity.Calendar;
 import com.example.RestAPICalendar.entity.Meeting;
+import com.example.RestAPICalendar.errors.WorkingTimeIsNullException;
+import com.example.RestAPICalendar.errors.WrongTimeException;
 import com.example.RestAPICalendar.model.MeetTime;
 import com.example.RestAPICalendar.service.CalendarService;
 import com.example.RestAPICalendar.service.MeetingService;
@@ -13,6 +15,7 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @RestController
@@ -33,16 +36,19 @@ public class Controller {
 
     @PostMapping( "/calendars")
     public ResponseEntity<EntityModel<Calendar>> saveCalendar(@RequestBody Calendar theCalendar){
-        for(Meeting meeting : theCalendar.getMeetings()){
-            meetingService.save(meeting);
+        if(isWorkingTimeExist(theCalendar) && isTimeRight(theCalendar)){
+            for(Meeting meeting : theCalendar.getMeetings()){
+                meetingService.save(meeting);
+            }
+            Calendar calendar = calendarService.save(new Calendar(
+                    EMPTY_ID,
+                    theCalendar.getWorkingTime(),
+                    theCalendar.getMeetings()
+            ));
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(EntityModel.of(calendar));
         }
-        Calendar calendar = calendarService.save(new Calendar(
-                EMPTY_ID,
-                theCalendar.getWorkingTime(),
-                theCalendar.getMeetings()
-        ));
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(EntityModel.of(calendar));
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/meetings/{calendarOneId}/{calendarTwoId}/{meetingTime}")
@@ -51,5 +57,19 @@ public class Controller {
                 .map(EntityModel::of)
                 .collect(Collectors.toList());
         return CollectionModel.of(meetTimes);
+    }
+
+    private boolean isWorkingTimeExist(Calendar calendar){
+        if(calendar.getWorkingTime() == null) throw new WorkingTimeIsNullException("Working time is null");
+        return true;
+    }
+
+    private boolean isTimeRight(Calendar calendar){
+        Pattern pattern = Pattern.compile("[0-2][0-9]:[0-5][0-9]");
+        if(!(pattern.matcher(calendar.getWorkingTime().getStart()).matches() && pattern.matcher(calendar.getWorkingTime().getEnd()).matches())) throw new WrongTimeException("Time is wrong");
+        for(Meeting tempMeeting : calendar.getMeetings()){
+            if(!(pattern.matcher(tempMeeting.getStart()).matches() && pattern.matcher(tempMeeting.getEnd()).matches())) throw new WrongTimeException("Time is wrong");
+        }
+        return true;
     }
 }
