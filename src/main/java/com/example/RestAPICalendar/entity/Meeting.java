@@ -1,5 +1,6 @@
 package com.example.RestAPICalendar.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +24,7 @@ public class Meeting {
 
     @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name="calendar_id")
+    @JsonIgnore
     private Calendar calendar;
 
     public int getId() {

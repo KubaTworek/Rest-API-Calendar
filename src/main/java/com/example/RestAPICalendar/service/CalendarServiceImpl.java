@@ -14,7 +14,7 @@ public class CalendarServiceImpl implements CalendarService{
 
     @Override
     public List<Calendar> findAll() {
-        return null;
+        return calendarDAO.findAll();
     }
 
     @Override
@@ -24,7 +24,7 @@ public class CalendarServiceImpl implements CalendarService{
 
     @Override
     public Calendar save(Calendar theCalendar) {
-        return null;
+        return calendarDAO.save(theCalendar);
     }
 
     @Override

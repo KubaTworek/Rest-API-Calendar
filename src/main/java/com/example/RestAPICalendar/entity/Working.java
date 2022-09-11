@@ -1,12 +1,13 @@
 package com.example.RestAPICalendar.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name="Meeting")
+@Table(name="Working")
 @Component
 @NoArgsConstructor
 public class Working {
@@ -21,7 +22,8 @@ public class Working {
     @Column(name="end")
     private String end;
 
-    @OneToOne(mappedBy = "meeting")
+    @OneToOne(mappedBy = "workingTime")
+    @JsonIgnore
     private Calendar calendar;
 
     public int getId() {

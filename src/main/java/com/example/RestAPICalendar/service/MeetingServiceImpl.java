@@ -24,7 +24,7 @@ public class MeetingServiceImpl implements MeetingService{
 
     @Override
     public Meeting save(Meeting theMeeting) {
-        return null;
+        return meetingDAO.save(theMeeting);
     }
 
     @Override

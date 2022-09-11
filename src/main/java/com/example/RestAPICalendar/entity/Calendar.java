@@ -1,5 +1,7 @@
 package com.example.RestAPICalendar.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -21,8 +23,17 @@ public class Calendar {
     @JoinColumn(name = "working_id")
     private Working workingTime;
 
-    @OneToMany(mappedBy = "Calendar", cascade = { CascadeType.ALL })
+    @OneToMany(mappedBy = "calendar", cascade = { CascadeType.ALL })
     private List<Meeting> meetings;
+
+    public Calendar(int id, Working workingTime, List<Meeting> meetings) {
+        this.id = id;
+        this.workingTime = workingTime;
+        this.meetings = meetings;
+        for(Meeting tempMeeting : meetings){
+            tempMeeting.setCalendar(this);
+        }
+    }
 
     public int getId() {
         return id;
@@ -32,6 +43,7 @@ public class Calendar {
         this.id = id;
     }
 
+    @JsonProperty("working_hours")
     public Working getWorkingTime() {
         return workingTime;
     }
@@ -40,6 +52,7 @@ public class Calendar {
         this.workingTime = workingTime;
     }
 
+    @JsonProperty("planned_meeting")
     public List<Meeting> getMeetings() {
         return meetings;
     }
