@@ -1,7 +1,9 @@
 package com.example.RestAPICalendar.service;
 
 import com.example.RestAPICalendar.dao.MeetingDAO;
+import com.example.RestAPICalendar.entity.Calendar;
 import com.example.RestAPICalendar.entity.Meeting;
+import com.example.RestAPICalendar.model.MeetTime;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

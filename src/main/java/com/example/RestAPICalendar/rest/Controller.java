@@ -2,6 +2,7 @@ package com.example.RestAPICalendar.rest;
 
 import com.example.RestAPICalendar.entity.Calendar;
 import com.example.RestAPICalendar.entity.Meeting;
+import com.example.RestAPICalendar.model.MeetTime;
 import com.example.RestAPICalendar.service.CalendarService;
 import com.example.RestAPICalendar.service.MeetingService;
 import lombok.RequiredArgsConstructor;
@@ -45,7 +46,10 @@ public class Controller {
     }
 
     @GetMapping("/meetings/{calendarOneId}/{calendarTwoId}/{meetingTime}")
-    public CollectionModel<List<Object>> getMeetings(@PathVariable int calendarOneId, @PathVariable int calendarTwoId, @PathVariable int meetingTime){
-        return null;
+    public CollectionModel<EntityModel<MeetTime>> getMeetings(@PathVariable int calendarOneId, @PathVariable int calendarTwoId, @PathVariable int meetingTime){
+        List<EntityModel<MeetTime>> meetTimes = calendarService.meetingCalculator(calendarOneId, calendarTwoId, meetingTime).stream()
+                .map(EntityModel::of)
+                .collect(Collectors.toList());
+        return CollectionModel.of(meetTimes);
     }
 }
