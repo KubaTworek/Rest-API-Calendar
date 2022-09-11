@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.RestAPICalendar.model.AppUtils.getMinutesFromTime;
+import static com.example.RestAPICalendar.model.AppUtils.getTimeFromMinutes;
+
 @Service
 public class MeetingMakerService {
     public List<MeetTime> calculateMeetings(Calendar calendarOne, Calendar calendarTwo, int duration){
@@ -65,17 +68,5 @@ public class MeetingMakerService {
             MeetTime meetTime = new MeetTime(getTimeFromMinutes(startTimeMeet),getTimeFromMinutes(endTimeMeet));
             meetings.add(meetTime);
         }
-    }
-
-    public int getMinutesFromTime(String time){
-        return Integer.parseInt(time.substring(3,5)) + Integer.parseInt(time.substring(0,2))*60;
-    }
-
-    public String getTimeFromMinutes(int mins){
-        int hours = mins / 60;
-        int minutes = mins % 60;
-        String hoursStr = (hours > 9) ? String.valueOf(hours) : "0"+hours;
-        String minutesStr = (minutes > 9) ? String.valueOf(minutes) : "0"+minutes;
-        return hoursStr + ":" + minutesStr;
     }
 }

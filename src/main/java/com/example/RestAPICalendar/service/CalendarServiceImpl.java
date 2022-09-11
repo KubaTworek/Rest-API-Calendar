@@ -29,10 +29,6 @@ public class CalendarServiceImpl implements CalendarService{
     }
 
     @Override
-    public void deleteById(int theId) {
-
-    }
-    @Override
     public List<MeetTime> meetingCalculator(int calendarOneId, int calendarTwoId, int duration) {
         return meetingMakerService.calculateMeetings(findById(calendarOneId), findById(calendarTwoId), duration);
     }
